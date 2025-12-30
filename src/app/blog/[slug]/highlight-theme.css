@@ -1,0 +1,161 @@
+/* Importera temat direkt från node_modules */
+@import "highlight.js/styles/atom-one-dark.css";
+
+/* Ta bort eller kommentera ut din gamla pre-styling och ersätt med detta */
+
+/* Själva containern för koden */
+pre {
+  background-color: #0d1117 !important; /* Mörkare grå/svart */
+  border: 1px solid #30363d !important;
+  border-radius: 0.5rem !important;
+  padding: 1rem !important; /* Justera denna för mindre padding */
+  margin: 1.5rem 0 !important;
+  overflow-x: auto;
+}
+
+/* Ta bort padding från den inre code-taggen som prose lägger till */
+.prose pre code {
+  padding: 0 !important;
+  background-color: transparent !important;
+  border: none !important;
+}
+
+/* Restore heading styles */
+.prose h1,
+.prose h2,
+.prose h3,
+.prose h4,
+.prose h5,
+.prose h6 {
+  font-weight: 600;
+  margin-top: 1.5em;
+  margin-bottom: 0.5em;
+}
+
+.prose h1 {
+  font-size: 2.25em;
+}
+
+.prose h2 {
+  font-size: 1.875em;
+}
+
+.prose h3 {
+  font-size: 1.5em;
+}
+
+.prose h4 {
+  font-size: 1.25em;
+}
+
+.prose h5 {
+  font-size: 1.125em;
+}
+
+.prose h6 {
+  font-size: 1em;
+}
+
+/* Table styles */
+.prose table {
+  border-collapse: collapse;
+  width: 100%;
+  margin: 1.5em 0;
+  font-size: 0.875em;
+}
+
+.prose table th,
+.prose table td {
+  border: 1px solid #475569;
+  padding: 0.75rem;
+  text-align: left;
+}
+
+.prose table th {
+  background-color: #1e293b;
+  font-weight: 600;
+}
+
+.prose table tbody tr:nth-child(even) {
+  background-color: rgba(71, 85, 105, 0.1);
+}
+
+.prose table tbody tr:hover {
+  background-color: rgba(71, 85, 105, 0.2);
+}
+
+/* Inline code styles */
+.prose code {
+  background-color: #1e293b;
+  color: #e2e8f0;
+  padding: 0.125rem 0.375rem;
+  border-radius: 0.25rem;
+  font-size: 0.9em;
+  font-weight: 500;
+  border: 1px solid #334155;
+}
+
+.prose code::before,
+.prose code::after {
+  content: "";
+}
+
+.prose pre code {
+  background-color: transparent;
+  color: inherit;
+  padding: 0;
+  border: none;
+  font-weight: inherit;
+}
+
+/* List styles */
+.prose ul,
+.prose ol {
+  margin: 1.25em 0;
+  padding-left: 1.625em;
+}
+
+.prose li {
+  margin-top: 0.5em;
+  margin-bottom: 0.5em;
+  line-height: 1.6;
+}
+
+.prose ul > li {
+  list-style-type: disc;
+}
+
+.prose ol > li {
+  list-style-type: decimal;
+}
+
+.prose ul ul,
+.prose ol ul {
+  list-style-type: circle;
+  margin: 0.5em 0;
+  padding-left: 1.625em;
+}
+
+.prose ol ol,
+.prose ul ol {
+  list-style-type: lower-alpha;
+  margin: 0.5em 0;
+  padding-left: 1.625em;
+}
+
+/* Link styles */
+.prose a {
+  color: #60a5fa;
+  text-decoration: none;
+  border-bottom: 1px solid transparent;
+  transition: all 0.2s ease;
+}
+
+.prose a:hover {
+  color: #93c5fd;
+  border-bottom-color: #60a5fa;
+}
+
+.prose a:active {
+  color: #3b82f6;
+}
