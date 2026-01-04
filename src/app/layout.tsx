@@ -19,6 +19,8 @@ export const metadata: Metadata = {
   description: "Notes on systems, endurance, and the cost of certainty.",
 };
 
+const currentYear = new Date().getFullYear(); 
+
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -37,7 +39,7 @@ export default function RootLayout({
 
           <footer className="w-full py-10 px-6 border-t border-slate-900">
             <div className="max-w-3xl mx-auto text-center text-slate-500 text-sm font-mono italic">
-              © {new Date().getFullYear()} Unomptimized | Built for the long run
+              © {currentYear} Unomptimized | Built for the long run
             </div>
           </footer>
         </ThemeProvider>
