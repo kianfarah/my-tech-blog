@@ -1,161 +1,127 @@
-/* Importera temat direkt från node_modules */
-@import "highlight.js/styles/atom-one-dark.css";
+/*
+ * Code blocks + highlight.js tokens, coloured via CSS variables in globals.css
+ * so they follow the light/dark theme.
+ */
 
-/* Ta bort eller kommentera ut din gamla pre-styling och ersätt med detta */
+.code-block {
+  position: relative;
+  border: 1px solid var(--hair2);
+  border-radius: var(--r);
+  background-color: var(--panel);
+}
 
-/* Själva containern för koden */
-pre {
-  background-color: #0d1117 !important; /* Mörkare grå/svart */
-  border: 1px solid #30363d !important;
-  border-radius: 0.5rem !important;
-  padding: 1rem !important; /* Justera denna för mindre padding */
-  margin: 1.5rem 0 !important;
+.code-block .lang {
+  position: absolute;
+  top: 0.5rem;
+  left: 1rem;
+  font: 400 0.75rem var(--mono);
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: var(--muted);
+}
+
+.code-block pre {
+  margin: 0;
+  padding: 1rem 1.25rem;
   overflow-x: auto;
-}
-
-/* Ta bort padding från den inre code-taggen som prose lägger till */
-.prose pre code {
-  padding: 0 !important;
-  background-color: transparent !important;
-  border: none !important;
-}
-
-/* Restore heading styles */
-.prose h1,
-.prose h2,
-.prose h3,
-.prose h4,
-.prose h5,
-.prose h6 {
-  font-weight: 600;
-  margin-top: 1.5em;
-  margin-bottom: 0.5em;
-}
-
-.prose h1 {
-  font-size: 2.25em;
-}
-
-.prose h2 {
-  font-size: 1.875em;
-}
-
-.prose h3 {
-  font-size: 1.5em;
-}
-
-.prose h4 {
-  font-size: 1.25em;
-}
-
-.prose h5 {
-  font-size: 1.125em;
-}
-
-.prose h6 {
-  font-size: 1em;
-}
-
-/* Table styles */
-.prose table {
-  border-collapse: collapse;
-  width: 100%;
-  margin: 1.5em 0;
-  font-size: 0.875em;
-}
-
-.prose table th,
-.prose table td {
-  border: 1px solid #475569;
-  padding: 0.75rem;
-  text-align: left;
-}
-
-.prose table th {
-  background-color: #1e293b;
-  font-weight: 600;
-}
-
-.prose table tbody tr:nth-child(even) {
-  background-color: rgba(71, 85, 105, 0.1);
-}
-
-.prose table tbody tr:hover {
-  background-color: rgba(71, 85, 105, 0.2);
-}
-
-/* Inline code styles */
-.prose code {
-  background-color: #1e293b;
-  color: #e2e8f0;
-  padding: 0.125rem 0.375rem;
-  border-radius: 0.25rem;
-  font-size: 0.9em;
-  font-weight: 500;
-  border: 1px solid #334155;
-}
-
-.prose code::before,
-.prose code::after {
-  content: "";
-}
-
-.prose pre code {
-  background-color: transparent;
-  color: inherit;
-  padding: 0;
-  border: none;
-  font-weight: inherit;
-}
-
-/* List styles */
-.prose ul,
-.prose ol {
-  margin: 1.25em 0;
-  padding-left: 1.625em;
-}
-
-.prose li {
-  margin-top: 0.5em;
-  margin-bottom: 0.5em;
+  font-size: var(--fs-sm);
   line-height: 1.6;
 }
-
-.prose ul > li {
-  list-style-type: disc;
+.code-block .lang + * + pre {
+  padding-top: 2.25rem;
 }
 
-.prose ol > li {
-  list-style-type: decimal;
+.code-block pre code {
+  display: block;
+  white-space: pre;
 }
 
-.prose ul ul,
-.prose ol ul {
-  list-style-type: circle;
-  margin: 0.5em 0;
-  padding-left: 1.625em;
+.code-block .copy {
+  position: absolute;
+  top: 0.5rem;
+  right: 0.5rem;
+  padding: 0.375rem;
+  border: 1px solid var(--hair2);
+  border-radius: var(--r-sm);
+  background: var(--panel);
+  color: var(--muted);
+  opacity: 0;
+  cursor: pointer;
+  transition: opacity 0.15s;
+}
+.code-block:hover .copy,
+.code-block .copy:focus-visible {
+  opacity: 1;
+}
+.code-block .copy:hover {
+  color: var(--accent);
 }
 
-.prose ol ol,
-.prose ul ol {
-  list-style-type: lower-alpha;
-  margin: 0.5em 0;
-  padding-left: 1.625em;
+.hljs {
+  color: var(--fg);
 }
 
-/* Link styles */
-.prose a {
-  color: #60a5fa;
-  text-decoration: none;
-  border-bottom: 1px solid transparent;
-  transition: all 0.2s ease;
+.hljs-comment,
+.hljs-quote {
+  color: var(--syn-comment);
+  font-style: italic;
 }
 
-.prose a:hover {
-  color: #93c5fd;
-  border-bottom-color: #60a5fa;
+.hljs-keyword,
+.hljs-selector-tag,
+.hljs-doctag,
+.hljs-template-tag,
+.hljs-meta .hljs-keyword,
+.hljs-deletion {
+  color: var(--syn-keyword);
 }
 
-.prose a:active {
-  color: #3b82f6;
+.hljs-string,
+.hljs-regexp,
+.hljs-addition,
+.hljs-meta .hljs-string {
+  color: var(--syn-string);
+}
+
+.hljs-number,
+.hljs-literal,
+.hljs-symbol,
+.hljs-bullet,
+.hljs-attr,
+.hljs-attribute,
+.hljs-selector-attr,
+.hljs-selector-class,
+.hljs-selector-id,
+.hljs-variable.language_,
+.hljs-built_in {
+  color: var(--syn-number);
+}
+
+.hljs-title,
+.hljs-title.function_,
+.hljs-title.class_,
+.hljs-section {
+  color: var(--syn-title);
+}
+
+.hljs-type,
+.hljs-params,
+.hljs-variable,
+.hljs-template-variable {
+  color: var(--syn-type);
+}
+
+.hljs-meta,
+.hljs-name,
+.hljs-tag,
+.hljs-selector-pseudo {
+  color: var(--syn-meta);
+}
+
+.hljs-emphasis {
+  font-style: italic;
+}
+
+.hljs-strong {
+  font-weight: 700;
 }

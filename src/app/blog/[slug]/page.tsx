@@ -1,11 +1,49 @@
-
+import Link from "next/link";
 import { compileMDX } from "next-mdx-remote/rsc";
 import remarkGfm from "remark-gfm";
 import rehypeHighlight from "rehype-highlight";
 
 import "./highlight-theme.css";
-import { getPostBySlug } from "../../../../lib/mdx";
+import {
+  formatDate,
+  getAllPostsMetadata,
+  getPostBySlug,
+} from "../../../../lib/mdx";
 import { Pre } from "@/app/components/mdx/code-block";
+
+export function generateStaticParams() {
+  return getAllPostsMetadata().map(({ slug }) => ({ slug }));
+}
+
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ slug: string }>;
+}) {
+  const { slug } = await params;
+  const { metadata } = await getPostBySlug(slug);
+  const url = `/blog/${slug}`;
+  return {
+    title: metadata.title,
+    description: metadata.description,
+    alternates: { canonical: url },
+    openGraph: {
+      type: "article",
+      siteName: "Unoptimized",
+      url,
+      title: metadata.title,
+      description: metadata.description,
+      publishedTime: metadata.date,
+      authors: ["Isak Farah"],
+      tags: metadata.tags,
+    },
+    twitter: {
+      card: "summary",
+      title: metadata.title,
+      description: metadata.description,
+    },
+  };
+}
 
 export default async function PostPage({
   params,
@@ -26,18 +64,47 @@ export default async function PostPage({
     },
   });
 
+  // Posts are sorted newest first: "newer" is the one before, "older" after.
+  const posts = getAllPostsMetadata();
+  const index = posts.findIndex((p) => p.slug === slug);
+  const newer = index > 0 ? posts[index - 1] : undefined;
+  const older = index >= 0 ? posts[index + 1] : undefined;
+
   return (
-    <article className="prose prose-invert prose-slate max-w-none prose-pre:bg-transparent">
-      <header className="mb-8 border-b border-slate-800 pb-8">
-        <h1 className="text-4xl font-bold mb-2 text-slate-100">
-          {metadata.title}
-        </h1>
-        <p className="text-slate-400">{metadata.date}</p>
+    <article className="article">
+      <header className="article-header">
+        <h1>{metadata.title}</h1>
+        <div className="article-meta">
+          <time dateTime={metadata.date}>{formatDate(metadata.date)}</time>
+          <span>{metadata.readingTime} min read</span>
+          {metadata.tags.map((tag) => (
+            <Link key={tag} href={`/tags/${tag}`} className="tag">
+              #{tag}
+            </Link>
+          ))}
+        </div>
       </header>
 
-      <div className="mt-8">
-        {mdxContent}
-      </div>
+      <div className="prose">{mdxContent}</div>
+
+      {(newer || older) && (
+        <nav className="post-footer">
+          {older ? (
+            <Link href={`/blog/${older.slug}`}>
+              <span className="label">← Older</span>
+              <span className="t">{older.title}</span>
+            </Link>
+          ) : (
+            <span />
+          )}
+          {newer && (
+            <Link href={`/blog/${newer.slug}`} className="text-right">
+              <span className="label">Newer →</span>
+              <span className="t">{newer.title}</span>
+            </Link>
+          )}
+        </nav>
+      )}
     </article>
   );
 }
