@@ -2,7 +2,8 @@ import Link from "next/link";
 import type { Metadata } from "next";
 import { formatDate, getAllPostsMetadata, groupByYear } from "../../../lib/mdx";
 
-export const metadata: Metadata = { title: "Archive | Unoptimized" };
+export const metadata: Metadata = { title: "Archive",
+  alternates: { canonical: "/archive" } };
 
 export default function ArchivePage() {
   const posts = getAllPostsMetadata();

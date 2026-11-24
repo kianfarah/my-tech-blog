@@ -22,9 +22,26 @@ export async function generateMetadata({
 }) {
   const { slug } = await params;
   const { metadata } = await getPostBySlug(slug);
+  const url = `/blog/${slug}`;
   return {
-    title: `${metadata.title} | Unoptimized`,
+    title: metadata.title,
     description: metadata.description,
+    alternates: { canonical: url },
+    openGraph: {
+      type: "article",
+      siteName: "Unoptimized",
+      url,
+      title: metadata.title,
+      description: metadata.description,
+      publishedTime: metadata.date,
+      authors: ["Isak Farah"],
+      tags: metadata.tags,
+    },
+    twitter: {
+      card: "summary",
+      title: metadata.title,
+      description: metadata.description,
+    },
   };
 }
 

@@ -14,7 +14,7 @@ export async function generateMetadata({
   params: Promise<{ tag: string }>;
 }) {
   const { tag } = await params;
-  return { title: `#${tag} | Unoptimized` };
+  return { title: `#${tag}`, alternates: { canonical: `/tags/${tag}` } };
 }
 
 export default async function TagPage({

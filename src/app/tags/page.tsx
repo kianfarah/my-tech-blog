@@ -2,7 +2,8 @@ import Link from "next/link";
 import type { Metadata } from "next";
 import { getAllTags } from "../../../lib/mdx";
 
-export const metadata: Metadata = { title: "Tags | Unoptimized" };
+export const metadata: Metadata = { title: "Tags",
+  alternates: { canonical: "/tags" } };
 
 export default function TagsPage() {
   const tags = getAllTags();

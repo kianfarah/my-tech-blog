@@ -1,7 +1,14 @@
+import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 import { SiGithub, SiLinkedin, SiInstagram, SiStrava } from "react-icons/si";
 import { Code2, Activity, Coffee } from "lucide-react";
+
+export const metadata: Metadata = {
+  title: "About",
+  description: "Java developer and long-distance runner writing about systems.",
+  alternates: { canonical: "/about" },
+};
 
 export default function AboutPage() {
   return (
